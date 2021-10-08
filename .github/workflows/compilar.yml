@@ -2,11 +2,16 @@ name: Compilar y Pruebas C#
 on: push
 jobs:
   Compilacion:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     environment: PRUEBAS
     steps:
       - run: echo "El secreto Google es ${{ secrets.GOOGLE_TOKEN }}"
       - uses: actions/checkout@v2
+      - uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: '5.0.301'
+      - name: Instalamos Dependencia de .NET
+        run: dotnet restore
       - name: Compilamos
         run: dotnet build
       - name: Ejecutamos las pruebas
