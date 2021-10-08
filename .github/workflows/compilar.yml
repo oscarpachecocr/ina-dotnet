@@ -3,9 +3,17 @@ on: push
 jobs:
   Compilacion:
     runs-on: windows-latest
+    environment: PRUEBAS
     steps:
+      - run: echo "El secreto Google es ${{ secrets.GOOGLE_TOKEN }}"
       - uses: actions/checkout@v2
       - name: Compilamos
         run: dotnet build
       - name: Ejecutamos las pruebas
         run: dotnet test
+      - name: Publicar un Release
+        uses: elgohr/Github-Release-Action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+        with:
+          args: Nuevo Release
