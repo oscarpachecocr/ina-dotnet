@@ -7,9 +7,9 @@ jobs:
     steps:
       - run: echo "El secreto Google es ${{ secrets.GOOGLE_TOKEN }}"
       - uses: actions/checkout@v2
-      - uses: actions/setup-dotnet@v2
+      - uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '5.0.301'
+          dotnet-version: '3.1.x'
       - name: Instalamos Dependencia de .NET
         run: dotnet restore
       - name: Compilamos
